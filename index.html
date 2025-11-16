@@ -3,337 +3,421 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JBLRB News - Fast • Fair • Fearless Journalism</title>
+    <title>JBLRB News Admin Dashboard</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background: linear-gradient(135deg, #f4f4f4 0%, #e9ecef 100%);
             color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
         }
         header {
-            background-color: #fff;
-            padding: 20px;
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            padding: 20px 0;
             text-align: center;
-            border-bottom: 2px solid #ddd;
+            border-bottom: 4px solid #d72631;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         .logo {
             font-size: 2em;
             font-weight: bold;
-            color: #007bff;
+            color: #d72631;
         }
-        .slogan {
-            font-style: italic;
-            margin-top: 10px;
+        .login-section, .dashboard {
+            background: #fff;
+            margin: 30px 0;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
-        .highlights {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-        }
-        .highlight {
-            background-color: #e9ecef;
-            padding: 10px;
-            border-radius: 5px;
-            width: 30%;
-        }
-        .breaking-news {
-            background-color: #ff0000;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            font-weight: bold;
-        }
-        .section {
-            margin: 20px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .hero {
-            text-align: center;
-        }
-        .hero img {
-            max-width: 100%;
-            height: auto;
-        }
-        .news-list {
-            list-style: none;
-            padding: 0;
-        }
-        .news-list li {
-            margin-bottom: 10px;
-        }
-        .gallery {
-            text-align: center;
-        }
-        .trending {
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .trending-item {
-            background-color: #f8f9fa;
-            margin: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            width: calc(33% - 20px);
-        }
-        .article {
-            margin: 20px;
-        }
-        .about, .bio, .category, .contact {
-            margin: 20px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .bio {
-            display: flex;
-            justify-content: space-between;
-        }
-        .bio-item {
-            width: 48%;
-        }
-        .contact-form {
+        .login-form {
             display: flex;
             flex-direction: column;
+            max-width: 400px;
+            margin: auto;
         }
-        .contact-form input, .contact-form textarea {
-            margin-bottom: 10px;
+        .login-form input {
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .login-form button {
+            background: #d72631;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .login-form button:hover {
+            background: #a31824;
+        }
+        .dashboard-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tab-button {
+            background: #f1f3f5;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .tab-button.active {
+            background: #d72631;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
             padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .submit-btn {
+            background: #d72631;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .submit-btn:hover {
+            background: #a31824;
+        }
+        .content-list {
+            margin-top: 20px;
+        }
+        .content-item {
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-left: 4px solid #d72631;
+        }
+        .content-item button {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .content-item button:hover {
+            background: #c82333;
         }
         footer {
-            background-color: #333;
-            color: white;
-            padding: 20px;
+            background: #222;
+            color: #ccc;
+            padding: 20px 0;
             text-align: center;
-        }
-        .footer-columns {
-            display: flex;
-            justify-content: space-around;
-        }
-        .footer-column {
-            width: 30%;
-        }
-        .footer-column ul {
-            list-style: none;
-            padding: 0;
-        }
-        .footer-column li {
-            margin-bottom: 5px;
-        }
-        @media (max-width: 768px) {
-            .highlights, .trending, .bio, .footer-columns {
-                flex-direction: column;
-            }
-            .highlight, .trending-item, .bio-item, .footer-column {
-                width: 100%;
-            }
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">JBLRB NEWS</div>
-        <div class="slogan">“Fast • Fair • Fearless Journalism”</div>
-        <div class="highlights">
-            <div class="highlight">
-                <strong>Reporter:</strong> B.M.B Kumar<br>
-                (Senior Field Journalist, Ground Report Specialist)
-            </div>
-            <div class="highlight">
-                <strong>Camera Man:</strong> Chotu C Ji<br>
-                (Lead Cinematographer & Visual Reporting Expert)
-            </div>
+        <div class="container">
+            <div class="logo">JBLRB NEWS ADMIN</div>
         </div>
     </header>
 
-    <div class="breaking-news">
-        “Government announces major policy change affecting rural areas.” | “Heavy rainfall alert issued for multiple districts.” | “Exclusive: JBLRB reporter B.M.B Kumar investigates highway scam.”
+    <div class="container login-section" id="loginSection">
+        <h2>Admin Login</h2>
+        <form class="login-form" id="loginForm">
+            <input type="text" placeholder="Username" id="username" required>
+            <input type="password" placeholder="Password" id="password" required>
+            <button type="submit">Login</button>
+        </form>
     </div>
 
-    <section class="section hero">
-        <h1>MAIN HEADLINE: “JBLRB EXCLUSIVE: Ground Report From Flood-Affected Region By B.M.B Kumar”</h1>
-        <p>Visuals captured by Camera Man Chotu C Ji.</p>
-        <p><strong>SHORT DESCRIPTION:</strong> Our team reaches the center of the crisis to bring you real, unbiased updates directly from the ground.</p>
-        <!-- Placeholder for image -->
-        <img src="https://via.placeholder.com/800x400?text=Flood+Report+Image" alt="Flood Report">
-    </section>
-
-    <section class="section">
-        <h2>Latest News</h2>
-        <ul class="news-list">
-            <li>“New education policy receives mixed reactions.”</li>
-            <li>“Farmers demand fair price and better support schemes.”</li>
-            <li>“Major cyber scam busted; officials reveal shocking details.”</li>
-        </ul>
-    </section>
-
-    <section class="section">
-        <h2>Featured Report</h2>
-        <p><strong>Special Report By B.M.B Kumar</strong></p>
-        <p>“Inside Story: How Rural Villages Are Adapting to Climate Change”</p>
-        <p>With exclusive camera coverage by Chotu C Ji.</p>
-    </section>
-
-    <section class="section gallery">
-        <h2>🎥 JBLRB News Video Reports</h2>
-        <p>Real visuals. Real stories.</p>
-        <p>Captured on field by Cameraman Chotu C Ji.</p>
-        <p>Narrated and reported by B.M.B Kumar.</p>
-        <!-- Placeholder for video -->
-        <video controls width="100%">
-            <source src="https://via.placeholder.com/800x400?text=Video+Placeholder" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </section>
-
-    <section class="section gallery">
-        <h2>📸 On-Ground Photo Gallery</h2>
-        <p>Powerful moments captured during real field reporting.</p>
-        <p>From villages to cities, JBLRB brings visuals that speak.</p>
-        <!-- Placeholder for images -->
-        <img src="https://via.placeholder.com/300x200?text=Photo+1" alt="Photo 1">
-        <img src="https://via.placeholder.com/300x200?text=Photo+2" alt="Photo 2">
-        <img src="https://via.placeholder.com/300x200?text=Photo+3" alt="Photo 3">
-    </section>
-
-    <section class="section">
-        <h2>Trending</h2>
-        <div class="trending">
-            <div class="trending-item">“Political unrest intensifies”</div>
-            <div class="trending-item">“New tech innovations in India”</div>
-            <div class="trending-item">“Youth demand employment reforms”</div>
+    <div class="container dashboard" id="dashboard" style="display: none;">
+        <h2>Welcome to JBLRB News Admin Dashboard</h2>
+        <div class="dashboard-tabs">
+            <button class="tab-button active" data-tab="news">Manage News</button>
+            <button class="tab-button" data-tab="videos">Manage Videos</button>
+            <button class="tab-button" data-tab="photos">Manage Photos</button>
+            <button class="tab-button" data-tab="categories">Manage Categories</button>
         </div>
-    </section>
 
-    <article class="article section">
-        <h2>Individual News Article Template</h2>
-        <h3>Headline: “Local Market Prices Rise Rapidly — Citizens Concerned”</h3>
-        <p><strong>Byline:</strong> Reported By: B.M.B Kumar | Camera: Chotu C Ji</p>
-        <p><strong>Intro Paragraph:</strong> Rising prices of daily essentials have caused worry among families. JBLRB’s ground team visited multiple markets to understand the situation.</p>
-        <p><strong>Body:</strong> (You can write the news body here depending on the story.)</p>
-        <p><strong>Conclusion:</strong> Stay updated with JBLRB News for verified, unbiased and fast coverage.</p>
-    </article>
-
-    <section class="about section">
-        <h2>About Us</h2>
-        <p><strong>ABOUT JBLRB NEWS</strong></p>
-        <p>JBLRB News is an independent digital news platform committed to delivering fast, factual and fearless journalism. Our goal is to present truthful stories, highlight public issues, and bring real ground reports to the audience.</p>
-        <p><strong>OUR VISION</strong></p>
-        <p>To become a reliable news source that stands for honesty, accuracy, and public interest.</p>
-        <p><strong>OUR MISSION</strong></p>
-        <ul>
-            <li>To deliver unbiased news</li>
-            <li>To provide on-ground field reporting</li>
-            <li>To highlight rural and urban issues</li>
-            <li>To bring the truth behind every story</li>
-        </ul>
-    </section>
-
-    <section class="bio section">
-        <div class="bio-item">
-            <h3>📌 Reporter: B.M.B Kumar</h3>
-            <p>Senior Field Reporter at JBLRB NEWS.</p>
-            <p>Known for his sharp questioning and fearless reporting style.</p>
-            <p>He has covered multiple issues including rural development, crime exposure, floods, and political controversies.</p>
-            <p><strong>Specialties:</strong></p>
-            <ul>
-                <li>Ground Journalism</li>
-                <li>Investigations</li>
-                <li>Live Reporting</li>
-                <li>Exclusive Interviews</li>
-            </ul>
+        <div class="tab-content active" id="news">
+            <h3>Add/Edit News</h3>
+            <form id="newsForm">
+                <div class="form-group">
+                    <label for="newsTitle">News Title</label>
+                    <input type="text" id="newsTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="newsContent">News Content</label>
+                    <textarea id="newsContent" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="newsCategory">Category</label>
+                    <select id="newsCategory">
+                        <option>Politics</option>
+                        <option>Crime</option>
+                        <option>Sports</option>
+                        <option>Health</option>
+                        <option>Technology</option>
+                        <option>Agriculture</option>
+                        <option>Education</option>
+                        <option>Entertainment</option>
+                        <option>Viral</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Add News</button>
+            </form>
+            <div class="content-list" id="newsList"></div>
         </div>
-        <div class="bio-item">
-            <h3>📌 Cameraman: Chotu C Ji</h3>
-            <p>Lead Camera Man at JBLRB NEWS.</p>
-            <p>Expert in high-quality video capture, on-ground visuals, and live coverage.</p>
-            <p>His camera work has brought powerful stories to millions.</p>
-            <p><strong>Specialties:</strong></p>
-            <ul>
-                <li>Video Shooting</li>
-                <li>Drone Footage</li>
-                <li>Live Telecast</li>
-                <li>Visual Storytelling</li>
-            </ul>
+
+        <div class="tab-content" id="videos">
+            <h3>Add Video</h3>
+            <form id="videoForm">
+                <div class="form-group">
+                    <label for="videoTitle">Video Title</label>
+                    <input type="text" id="videoTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="videoUrl">Video URL</label>
+                    <input type="url" id="videoUrl" placeholder="https://example.com/video.mp4" required>
+                </div>
+                <button type="submit" class="submit-btn">Add Video</button>
+            </form>
+            <div class="content-list" id="videoList"></div>
         </div>
-    </section>
 
-    <section class="category section">
-        <h2>Category Page Introductions</h2>
-        <ul>
-            <li><strong>India:</strong> Updates from across the nation — politics, economy, society.</li>
-            <li><strong>Politics:</strong> Analysis, debates, election updates, government policies.</li>
-            <li><strong>Crime:</strong> Real investigative stories, truth behind criminal activities.</li>
-            <li><strong>Entertainment:</strong> Films, celebrities, TV updates, viral trends.</li>
-            <li><strong>Sports:</strong> Cricket, football, tournaments, highlights.</li>
-            <li><strong>Agriculture:</strong> Farmer issues, crop updates, govt schemes.</li>
-            <li><strong>Technology:</strong> New gadgets, AI updates, innovations.</li>
-            <li><strong>Education:</strong> New rules, exams, results, school & college news.</li>
-            <li><strong>Health:</strong> Diseases, medical advice, government health schemes.</li>
-            <li><strong>Viral:</strong> Everything trending from social media.</li>
-        </ul>
-    </section>
+        <div class="tab-content" id="photos">
+            <h3>Add Photo</h3>
+            <form id="photoForm">
+                <div class="form-group">
+                    <label for="photoTitle">Photo Title</label>
+                    <input type="text" id="photoTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="photoUrl">Photo URL</label>
+                    <input type="url" id="photoUrl" placeholder="https://example.com/photo.jpg" required>
+                </div>
+                <button type="submit" class="submit-btn">Add Photo</button>
+            </form>
+            <div class="content-list" id="photoList"></div>
+        </div>
 
-    <section class="contact section">
-        <h2>Contact</h2>
-        <p><strong>CONTACT JBLRB NEWS</strong></p>
-        <p>Email: contact@jblrbnews.com</p>
-        <p>Phone: +91-XXXXXXXXXX</p>
-        <p>Address: JBLRB News Office, India</p>
-        <form class="contact-form">
-            <input type="text" placeholder="Name" required>
-            <input type="email" placeholder="Email" required>
-            <input type="tel" placeholder="Phone">
-            <textarea placeholder="Message" required></textarea>
-            <button type="submit">Send</button>
-        </form>
-    </section>
+        <div class="tab-content" id="categories">
+            <h3>Manage Categories</h3>
+            <form id="categoryForm">
+                <div class="form-group">
+                    <label for="categoryName">Category Name</label>
+                    <input type="text" id="categoryName" required>
+                </div>
+                <div class="form-group">
+                    <label for="categoryDesc">Description</label>
+                    <textarea id="categoryDesc" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Add Category</button>
+            </form>
+            <div class="content-list" id="categoryList"></div>
+        </div>
+    </div>
 
     <footer>
-        <div class="footer-columns">
-            <div class="footer-column">
-                <h4>About</h4>
-                <p>JBLRB News delivers fast, fair and fearless journalism with ground reporting and real stories.</p>
-            </div>
-            <div class="footer-column">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li>Home</li>
-                    <li>Latest News</li>
-                    <li>Videos</li>
-                    <li>Photo Gallery</li>
-                    <li>About Us</li>
-                    <li>Contact Us</li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>Categories</h4>
-                <ul>
-                    <li>Politics</li>
-                    <li>Sports</li>
-                    <li>Crime</li>
-                    <li>Tech</li>
-                    <li>Health</li>
-                    <li>Viral</li>
-                </ul>
-            </div>
-        </div>
-        <div class="bottom-bar">
-            <p>© 2025 JBLRB NEWS — All Rights Reserved. Powered by JBLRB Media Group.</p>
+        <div class="container">
+            <p>© 2025 JBLRB NEWS — Admin Dashboard. All Rights Reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Simple JS for contact form (placeholder - in real site, use backend)
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+        // Simple login simulation (username: admin, password: admin)
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Thank you for your message! We will get back to you soon.');
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username === 'admin' && password === 'admin') {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                loadContent();
+            } else {
+                alert('Invalid credentials!');
+            }
         });
+
+        // Tab switching
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById(this.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Load content from localStorage
+        function loadContent() {
+            loadNews();
+            loadVideos();
+            loadPhotos();
+            loadCategories();
+        }
+
+        function loadNews() {
+            const news = JSON.parse(localStorage.getItem('news') || '[]');
+            const list = document.getElementById('newsList');
+            list.innerHTML = '';
+            news.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'content-item';
+                div.innerHTML = `<strong>${item.title}</strong><br>${item.content}<br>Category: ${item.category}<button onclick="deleteNews(${index})">Delete</button>`;
+                list.appendChild(div);
+            });
+        }
+
+        function loadVideos() {
+            const videos = JSON.parse(localStorage.getItem('videos') || '[]');
+            const list = document.getElementById('videoList');
+            list.innerHTML = '';
+            videos.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'content-item';
+                div.innerHTML = `<strong>${item.title}</strong><br><a href="${item.url}" target="_blank">${item.url}</a><button onclick="deleteVideo(${index})">Delete</button>`;
+                list.appendChild(div);
+            });
+        }
+
+        function loadPhotos() {
+            const photos = JSON.parse(localStorage.getItem('photos') || '[]');
+            const list = document.getElementById('photoList');
+            list.innerHTML = '';
+            photos.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'content-item';
+                div.innerHTML = `<strong>${item.title}</strong><br><img src="${item.url}" alt="${item.title}" style="max-width: 100px;"><button onclick="deletePhoto(${index})">Delete</button>`;
+                list.appendChild(div);
+            });
+        }
+
+        function loadCategories() {
+            const categories = JSON.parse(localStorage.getItem('categories') || '[]');
+            const list = document.getElementById('categoryList');
+            list.innerHTML = '';
+            categories.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'content-item';
+                div.innerHTML = `<strong>${item.name}</strong><br>${item.desc}<button onclick="deleteCategory(${index})">Delete</button>`;
+                list.appendChild(div);
+            });
+        }
+
+        // Add news
+        document.getElementById('newsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('newsTitle').value;
+            const content = document.getElementById('newsContent').value;
+            const category = document.getElementById('newsCategory').value;
+            const news = JSON.parse(localStorage.getItem('news') || '[]');
+            news.push({ title, content, category });
+            localStorage.setItem('news', JSON.stringify(news));
+            loadNews();
+            this.reset();
+        });
+
+        // Add video
+        document.getElementById('videoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('videoTitle').value;
+            const url = document.getElementById('videoUrl').value;
+            const videos = JSON.parse(localStorage.getItem('videos') || '[]');
+            videos.push({ title, url });
+            localStorage.setItem('videos', JSON.stringify(videos));
+            loadVideos();
+            this.reset();
+        });
+
+        // Add photo
+        document.getElementById('photoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('photoTitle').value;
+            const url = document.getElementById('photoUrl').value;
+            const photos = JSON.parse(localStorage.getItem('photos') || '[]');
+            photos.push({ title, url });
+            localStorage.setItem('photos', JSON.stringify(photos));
+            loadPhotos();
+            this.reset();
+        });
+
+        // Add category
+        document.getElementById('categoryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('categoryName').value;
+            const desc = document.getElementById('categoryDesc').value;
+            const categories = JSON.parse(localStorage.getItem('categories') || '[]');
+            categories.push({ name, desc });
+            localStorage.setItem('categories', JSON.stringify(categories));
+            loadCategories();
+            this.reset();
+        });
+
+        // Delete functions
+        function deleteNews(index) {
+            const news = JSON.parse(localStorage.getItem('news') || '[]');
+            news.splice(index, 1);
+            localStorage.setItem('news', JSON.stringify(news));
+            loadNews();
+        }
+
+        function deleteVideo(index) {
+            const videos = JSON.parse(localStorage.getItem('videos') || '[]');
+            videos.splice(index, 1);
+            localStorage.setItem('videos', JSON.stringify(videos));
+            loadVideos();
+        }
+
+        function deletePhoto(index) {
+            const photos = JSON.parse(localStorage.getItem('photos') || '[]');
+            photos.splice(index, 1);
+            localStorage.setItem('photos', JSON.stringify(photos));
+            loadPhotos();
+        }
+
+        function deleteCategory(index) {
+            const categories = JSON.parse(localStorage.getItem('categories') || '[]');
+            categories.splice(index, 1);
+            localStorage.setItem('categories', JSON.stringify(categories));
+            loadCategories();
+        }
     </script>
 </body>
 </html>
